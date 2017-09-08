@@ -13,10 +13,6 @@
         flex-direction: row;
         width:270px;
       }
-      .widget-title:visited,.widget-title:active,.widget-title:hover,.widget-title:link{
-        text-decoration:none;
-        color:green;
-      }
       .widget-title img {
         height:70px;
         width:70px;
@@ -49,5 +45,21 @@
       <a class="badge-link" target="_blank" href="https://play.google.com/store/apps/details?id=com.mulchsaver.mobileapp"><img src="img/google-play-badge.svg" alt="Mulch Saver - Google Play Store"></a>
       <a class="badge-link" target="_blank" href="https://itunes.apple.com/us/app/mulch-saver/id1262925761?mt=8"><img src="img/app-store-badge.svg" alt="Mulch Saver - iOS App Store"></a>
     </div>
+    <script>
+      var titleColor = getURLParameter('color');
+      if (!titleColor) {
+          if (navigator.appName == 'Microsoft Internet Explorer' ||  !!(navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/rv:11/))) {
+          document.styleSheets[0].addRule('.widget-title:visited,.widget-title:active,.widget-title:hover,.widget-title:link', 'color:green;text-decoration:none;', 0);
+        } else {
+          document.styleSheets[0].insertRule('.widget-title:visited,.widget-title:active,.widget-title:hover,.widget-title:link { color:green;text-decoration:none; }', 0);
+        }
+      } else {
+        document.styleSheets[0].insertRule('.widget-title:visited,.widget-title:active,.widget-title:hover,.widget-title:link { color:' + titleColor + ';text-decoration:none; }', 0);
+      }
+
+      function getURLParameter(name) {
+        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+      }
+    </script>
   </body>
 </html>
